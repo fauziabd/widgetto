@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Privacy Policy - Sideload</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
+      min-height: 100vh;
+      color: #ffffff;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 720px;
+      margin: 0 auto;
+      padding: 60px 24px;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 48px;
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      border-radius: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 24px;
+      font-size: 40px;
+    }
+
+    h1 {
+      font-size: 36px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 16px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(20px);
+      border-radius: 16px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .highlight-card {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
+      border-color: rgba(102, 126, 234, 0.3);
+      text-align: center;
+      padding: 40px 32px;
+    }
+
+    .highlight-card .icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .highlight-card h2 {
+      font-size: 24px;
+      margin-bottom: 12px;
+      color: #ffffff;
+    }
+
+    .highlight-card p {
+      color: rgba(255, 255, 255, 0.8);
+      font-size: 18px;
+    }
+
+    h2 {
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h2 .icon {
+      font-size: 24px;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.7);
+      margin-bottom: 16px;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+
+    ul {
+      list-style: none;
+      margin: 16px 0;
+    }
+
+    li {
+      color: rgba(255, 255, 255, 0.7);
+      padding: 12px 0;
+      padding-left: 32px;
+      position: relative;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    li:last-child {
+      border-bottom: none;
+    }
+
+    li::before {
+      content: "✓";
+      position: absolute;
+      left: 0;
+      color: #667eea;
+      font-weight: bold;
+    }
+
+    .permissions-grid {
+      display: grid;
+      gap: 16px;
+      margin-top: 16px;
+    }
+
+    .permission-item {
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 12px;
+      padding: 16px;
+    }
+
+    .permission-item strong {
+      color: #ffffff;
+      display: block;
+      margin-bottom: 4px;
+    }
+
+    .permission-item span {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 14px;
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 48px;
+      padding-top: 32px;
+      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .footer p {
+      color: rgba(255, 255, 255, 0.4);
+      font-size: 14px;
+    }
+
+    .update-date {
+      display: inline-block;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 14px;
+      color: rgba(255, 255, 255, 0.6);
+      margin-bottom: 24px;
+    }
+
+    a {
+      color: #667eea;
+      text-decoration: none;
+    }
+
+    a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 600px) {
+      .container {
+        padding: 40px 16px;
+      }
+
+      h1 {
+        font-size: 28px;
+      }
+
+      .card {
+        padding: 24px;
+      }
+
+      .highlight-card {
+        padding: 32px 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <div class="logo">📱</div>
+      <h1>Privacy Policy</h1>
+      <p class="subtitle">Sideload - Side Panel Web App Manager</p>
+    </header>
+
+    <span class="update-date">Last updated: December 2024</span>
+
+    <div class="card highlight-card">
+      <div class="icon">🔒</div>
+      <h2>Your Privacy is Protected</h2>
+      <p>Sideload does not collect, store, or transmit any personal data. Everything stays on your device.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="icon">📊</span> Data Collection</h2>
+      <p>We believe in complete transparency. Here's what Sideload does NOT do:</p>
+      <ul>
+        <li>We do NOT collect any personal information</li>
+        <li>We do NOT track your browsing activity</li>
+        <li>We do NOT send data to external servers</li>
+        <li>We do NOT use analytics or tracking tools</li>
+        <li>We do NOT store any data outside your browser</li>
+        <li>We do NOT share any information with third parties</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><span class="icon">💾</span> Local Storage Only</h2>
+      <p>All your data is stored locally in your browser using Chrome's built-in storage API. This includes:</p>
+      <ul>
+        <li>Your saved web apps and their URLs</li>
+        <li>App icon preferences and ordering</li>
+        <li>Todo list items</li>
+        <li>Quick notes</li>
+        <li>Pomodoro timer settings</li>
+        <li>Theme and display preferences</li>
+      </ul>
+      <p>This data never leaves your device and is only accessible to you. If you uninstall the extension, all locally stored data is automatically deleted.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="icon">🔑</span> Permissions Explained</h2>
+      <p>Sideload requires certain permissions to function. Here's why:</p>
+      <div class="permissions-grid">
+        <div class="permission-item">
+          <strong>Storage</strong>
+          <span>Save your apps, settings, and widget data locally in your browser</span>
+        </div>
+        <div class="permission-item">
+          <strong>Side Panel</strong>
+          <span>Display the extension interface in Chrome's side panel</span>
+        </div>
+        <div class="permission-item">
+          <strong>Declarative Net Request</strong>
+          <span>Enable mobile user-agent mode and allow websites to load in iframes</span>
+        </div>
+        <div class="permission-item">
+          <strong>Host Permissions (All URLs)</strong>
+          <span>Required to load any website you add into the side panel</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span class="icon">🌐</span> Third-Party Websites</h2>
+      <p>When you add websites to Sideload, those sites are loaded within the extension's side panel. Please note:</p>
+      <ul>
+        <li>Each website has its own privacy policy</li>
+        <li>Websites may use their own cookies and tracking</li>
+        <li>Sideload has no control over third-party website behavior</li>
+        <li>We recommend reviewing the privacy policies of sites you add</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><span class="icon">👤</span> Your Control</h2>
+      <p>You have complete control over your data:</p>
+      <ul>
+        <li>Delete individual apps anytime from Settings</li>
+        <li>Clear all data by uninstalling the extension</li>
+        <li>Export/backup not needed - data only exists locally</li>
+        <li>No account required - use immediately without signup</li>
+      </ul>
+    </div>
+
+    <div class="card">
+      <h2><span class="icon">📝</span> Changes to This Policy</h2>
+      <p>If we ever make changes to this privacy policy, we will update this page and the "Last updated" date above. Since we don't collect any data, we have no way to notify you directly of changes - we recommend checking this page periodically.</p>
+    </div>
+
+    <div class="card">
+      <h2><span class="icon">📧</span> Contact</h2>
+      <p>If you have any questions about this privacy policy or the extension, please open an issue on our GitHub repository or contact us through the Chrome Web Store listing.</p>
+    </div>
+
+    <footer class="footer">
+      <p>Sideload - Side Panel Web App Manager</p>
+      <p>Made with privacy in mind</p>
+    </footer>
+  </div>
+</body>
+</html>
