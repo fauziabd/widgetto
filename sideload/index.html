@@ -1,314 +1,449 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Privacy Policy - Sideload</title>
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sideload - Your Favorite Web Apps on Chrome Side Panel</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .glass { background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.2); }
+        .hero-gradient { background: radial-gradient(circle at top right, #f5f3ff 0%, #ffffff 50%, #fff1f2 100%); }
+        .feature-card:hover { transform: translateY(-8px); transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); }
+        .gradient-text { background: linear-gradient(135deg, #4f46e5 0%, #ec4899 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        
+        /* Chrome Browser UI Mockup */
+        .chrome-browser { background: #f1f3f4; border-radius: 12px; border: 1px solid #d1d5db; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.15); }
+        .chrome-toolbar { height: 40px; background: #dee1e6; display: flex; align-items: center; padding: 0 12px; gap: 8px; }
+        .chrome-url-bar { flex: 1; height: 28px; background: white; border-radius: 14px; margin: 0 8px; display: flex; align-items: center; padding: 0 12px; font-size: 11px; color: #5f6368; }
+        
+        /* Layout: Side Panel Left, Tab Right */
+        .browser-layout { display: flex; height: 400px; background: white; }
+        .main-webpage { flex: 1; background: #ffffff; padding: 24px; }
+        
+        /* Sideload Side Panel Styles */
+        .side-panel { width: 190px; display: flex; background: #0f172a; color: white; border-right: 2px solid #e5e7eb; }
+        .sidebar-rail { width: 44px; background: rgba(0, 0, 0, 0.2); border-right: 1px solid rgba(255, 255, 255, 0.05); display: flex; flex-direction: column; align-items: center; padding: 10px 0; }
+        .webview-area { flex: 1; display: flex; flex-direction: column; background: #1e1b4b; }
+        
+        .rail-icon { width: 28px; height: 28px; border-radius: 6px; display: flex; align-items: center; justify-content: center; margin-bottom: 8px; font-size: 12px; cursor: pointer; background: rgba(255, 255, 255, 0.05); color: rgba(255, 255, 255, 0.5); }
+        .rail-icon.active { background: #4f46e5; color: white; }
+        
+        .skeleton-line { height: 8px; background: #f3f4f6; border-radius: 4px; margin-bottom: 8px; }
+        .skeleton-img { height: 120px; background: #f9fafb; border-radius: 8px; margin-bottom: 12px; }
 
-    body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
-      background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-      min-height: 100vh;
-      color: #ffffff;
-      line-height: 1.6;
-    }
-
-    .container {
-      max-width: 720px;
-      margin: 0 auto;
-      padding: 60px 24px;
-    }
-
-    .header {
-      text-align: center;
-      margin-bottom: 48px;
-    }
-
-    .logo {
-      width: 80px;
-      height: 80px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0 auto 24px;
-    }
-
-    h1 {
-      font-size: 36px;
-      font-weight: 700;
-      margin-bottom: 8px;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .subtitle {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 16px;
-    }
-
-    .card {
-      background: rgba(255, 255, 255, 0.08);
-      backdrop-filter: blur(20px);
-      border-radius: 16px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      padding: 32px;
-      margin-bottom: 24px;
-    }
-
-    .highlight-card {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2) 0%, rgba(118, 75, 162, 0.2) 100%);
-      border-color: rgba(102, 126, 234, 0.3);
-      text-align: left;
-      padding: 40px 32px;
-    }
-
-    .highlight-card .icon {
-      font-size: 48px;
-      margin-bottom: 16px;
-    }
-
-    .highlight-card h2 {
-      font-size: 24px;
-      margin-bottom: 12px;
-      color: #ffffff;
-    }
-
-    .highlight-card p {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 18px;
-    }
-
-    h2 {
-      font-size: 20px;
-      font-weight: 600;
-      margin-bottom: 16px;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
-
-    h2 .icon {
-      font-size: 24px;
-    }
-
-    p {
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 16px;
-    }
-
-    p:last-child {
-      margin-bottom: 0;
-    }
-
-    ul {
-      list-style: none;
-      margin: 16px 0;
-    }
-
-    li {
-      color: rgba(255, 255, 255, 0.7);
-      padding: 12px 0;
-      padding-left: 32px;
-      position: relative;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-    }
-
-    li:last-child {
-      border-bottom: none;
-    }
-
-    li::before {
-      content: "✓";
-      position: absolute;
-      left: 0;
-      color: #667eea;
-      font-weight: bold;
-    }
-
-    .permissions-grid {
-      display: grid;
-      gap: 16px;
-      margin-top: 16px;
-    }
-
-    .permission-item {
-      background: rgba(255, 255, 255, 0.05);
-      border-radius: 12px;
-      padding: 16px;
-    }
-
-    .permission-item strong {
-      color: #ffffff;
-      display: block;
-      margin-bottom: 4px;
-    }
-
-    .permission-item span {
-      color: rgba(255, 255, 255, 0.6);
-      font-size: 14px;
-    }
-
-    .footer {
-      text-align: center;
-      margin-top: 48px;
-      padding-top: 32px;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
-    }
-
-    .footer p {
-      color: rgba(255, 255, 255, 0.4);
-      font-size: 14px;
-    }
-
-    .update-date {
-      display: inline-block;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 14px;
-      color: rgba(255, 255, 255, 0.6);
-      margin-bottom: 24px;
-    }
-
-    a {
-      color: #667eea;
-      text-decoration: none;
-    }
-
-    a:hover {
-      text-decoration: underline;
-    }
-
-    @media (max-width: 600px) {
-      .container {
-        padding: 40px 16px;
-      }
-
-      h1 {
-        font-size: 28px;
-      }
-
-      .card {
-        padding: 24px;
-      }
-
-      .highlight-card {
-        padding: 32px 24px;
-      }
-    }
-  </style>
+        /* Use Case Tab Styles */
+        .case-tab.active { background-color: white; border-color: #e2e8f0; color: #4f46e5; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1); }
+    </style>
 </head>
-<body>
-  <div class="container">
-    <header class="header">
-      <img class="logo" src="/uploads/sideload-icon.png" />
-      <h1>Privacy Policy</h1>
-      <p class="subtitle">Sideload - Side Panel Web App Manager</p>
+<body class="bg-slate-50 text-slate-900">
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 glass px-6 py-4">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center text-white font-bold text-xl shadow-lg shadow-indigo-200">S</div>
+                <span class="text-2xl font-extrabold tracking-tight text-slate-800">Sideload</span>
+            </div>
+            <div class="hidden md:flex gap-10 font-semibold text-slate-600">
+                <a href="#features" class="hover:text-indigo-600 transition-colors">Features</a>
+                <a href="#use-cases" class="hover:text-indigo-600 transition-colors">Use Cases</a>
+                <a href="#how-to" class="hover:text-indigo-600 transition-colors">How to Use</a>
+                <a href="#privacy" class="hover:text-indigo-600 transition-colors">Privacy</a>
+            </div>
+            <a href="https://chromewebstore.google.com/detail/sideload-your-favorite-we/fhddbcmcanhjfalacfakppkkplidfhbh" 
+               target="_blank" 
+               class="bg-indigo-600 text-white px-6 py-2.5 rounded-full font-bold hover:bg-indigo-700 transition transform hover:scale-105 shadow-xl shadow-indigo-200">
+                Add to Chrome
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="pt-40 pb-24 px-6 hero-gradient overflow-hidden">
+        <div class="max-w-7xl mx-auto grid lg:grid-cols-2 gap-16 items-center">
+            <div>
+                <span class="bg-indigo-100 text-indigo-700 px-4 py-2 rounded-full text-sm font-bold uppercase tracking-widest inline-block mb-6">Vertical Side Panel Viewer</span>
+                <h1 class="text-5xl lg:text-7xl font-extrabold mb-8 text-slate-900 leading-tight">
+                    Your Favorite Apps. <br><span class="gradient-text text-6xl lg:text-8xl">One Click Away.</span>
+                </h1>
+                <p class="text-xl text-slate-600 mb-10 leading-relaxed max-w-lg">
+                    Sideload transforms Chrome's side panel into a powerful web apps and websites viewer. Keep your favorite websites accessible alongside any page without the clutter of multiple tabs.
+                </p>
+                <div class="flex flex-col sm:flex-row gap-4">
+                    <a href="https://chromewebstore.google.com/detail/sideload-your-favorite-we/fhddbcmcanhjfalacfakppkkplidfhbh" class="bg-slate-900 text-white px-10 py-5 rounded-2xl text-lg font-bold hover:bg-slate-800 transition shadow-2xl flex items-center justify-center">
+                        <i class="fab fa-chrome mr-3"></i> Install Sideload
+                    </a>
+                </div>
+            </div>
+            
+            <!-- Browser Mockup -->
+            <div class="relative">
+                <div class="chrome-browser">
+                    <div class="chrome-toolbar">
+                        <div class="flex gap-1.5 mr-2">
+                            <div class="w-2.5 h-2.5 rounded-full bg-red-400"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-yellow-400"></div>
+                            <div class="w-2.5 h-2.5 rounded-full bg-green-400"></div>
+                        </div>
+                        <div class="bg-white px-4 py-1.5 rounded-t-lg text-[10px] text-slate-600 font-medium border-x border-t border-slate-300 flex items-center gap-2">
+                            <i class="fas fa-file-alt text-indigo-500"></i> Active Browsing Tab
+                        </div>
+                        <div class="chrome-url-bar">
+                            <i class="fas fa-lock text-[8px] mr-2"></i> website.com
+                        </div>
+                    </div>
+                    <div class="browser-layout">
+                        <!-- Sideload Side Panel (Left) -->
+                        <div class="side-panel">
+                            <div class="sidebar-rail">
+                                <div class="rail-icon active"><i class="fas fa-home"></i></div>
+                                <div class="rail-icon"><i class="fab fa-instagram"></i></div>
+                                <div class="rail-icon"><i class="fab fa-youtube text-red-500"></i></div>
+                                <div class="rail-icon"><i class="fab fa-whatsapp text-emerald-400"></i></div>
+                                <div class="rail-icon"><i class="fas fa-robot text-emerald-500"></i></div>
+                                <div class="mt-auto">
+                                    <div class="rail-icon"><i class="fas fa-plus"></i></div>
+                                    <div class="rail-icon"><i class="fas fa-cog"></i></div>
+                                </div>
+                            </div>
+                            <div class="webview-area">
+                                <div class="p-3 border-b border-white/5 flex items-center justify-between">
+                                    <span class="text-[9px] font-bold opacity-60 uppercase tracking-tighter">Dashboard</span>
+                                    <i class="fas fa-sync-alt text-[8px] opacity-40"></i>
+                                </div>
+                                <div class="flex-1 p-4 text-center">
+                                    <h4 class="text-xl font-bold mb-1">11:51</h4>
+                                    <p class="text-[7px] opacity-40 mb-6 uppercase">Thursday, Dec 19</p>
+                                    <div class="space-y-3">
+                                        <div class="bg-white/5 p-2.5 rounded-lg border border-white/5 text-left">
+                                            <div class="flex items-center gap-2 mb-2">
+                                                <div class="w-1.5 h-1.5 rounded-full bg-blue-400"></div>
+                                                <span class="text-[7px] font-bold">Pomodoro Timer</span>
+                                            </div>
+                                            <div class="text-sm font-mono text-center">25:00</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="main-webpage">
+                            <div class="skeleton-line w-1/4 h-4 mb-6"></div>
+                            <div class="skeleton-line w-full"></div>
+                            <div class="skeleton-line w-full"></div>
+                            <div class="skeleton-line w-3/4"></div>
+                            <div class="skeleton-img mt-6"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </header>
 
-    <span class="update-date">Last updated: December 2024</span>
+    <!-- Use Cases Section (Perfect For) -->
+    <section id="use-cases" class="py-24 px-6">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Perfect For Your Workflow</h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">Whether you're a professional managing tools or a student taking notes, Sideload is designed for efficiency.</p>
+            </div>
 
-    <div class="card highlight-card">
-      <div class="icon">🔒</div>
-      <h2>Your Privacy is Protected</h2>
-      <p>Sideload does not collect, store, or transmit any personal data. Everything stays on your device.</p>
-    </div>
+            <div class="grid lg:grid-cols-12 gap-12 items-center">
+                <div class="lg:col-span-4 space-y-4">
+                    <button onclick="switchCase('social')" id="btn-social" class="case-tab w-full text-left p-6 rounded-2xl border-2 border-transparent hover:border-slate-200 transition-all active">
+                        <h4 class="font-bold text-lg mb-1 flex items-center gap-3">
+                            <i class="fas fa-users text-pink-500"></i> Social Media Managers
+                        </h4>
+                        <p class="text-sm text-slate-500">Monitor multiple platforms simultaneously without tab overload.</p>
+                    </button>
+                    <button onclick="switchCase('dev')" id="btn-dev" class="case-tab w-full text-left p-6 rounded-2xl border-2 border-transparent hover:border-slate-200 transition-all">
+                        <h4 class="font-bold text-lg mb-1 flex items-center gap-3">
+                            <i class="fas fa-code text-blue-500"></i> Developers
+                        </h4>
+                        <p class="text-sm text-slate-500">Check documentation or API status while actively coding.</p>
+                    </button>
+                    <button onclick="switchCase('student')" id="btn-student" class="case-tab w-full text-left p-6 rounded-2xl border-2 border-transparent hover:border-slate-200 transition-all">
+                        <h4 class="font-bold text-lg mb-1 flex items-center gap-3">
+                            <i class="fas fa-graduation-cap text-emerald-500"></i> Students
+                        </h4>
+                        <p class="text-sm text-slate-500">Take notes while researching and summarize articles side-by-side.</p>
+                    </button>
+                    <button onclick="switchCase('pro')" id="btn-pro" class="case-tab w-full text-left p-6 rounded-2xl border-2 border-transparent hover:border-slate-200 transition-all">
+                        <h4 class="font-bold text-lg mb-1 flex items-center gap-3">
+                            <i class="fas fa-briefcase text-orange-500"></i> Professionals
+                        </h4>
+                        <p class="text-sm text-slate-500">Manage multiple web tools and dashboards throughout the day.</p>
+                    </button>
+                </div>
 
-    <div class="card">
-      <h2><span class="icon">📊</span> Data Collection</h2>
-      <p>We believe in complete transparency. Here's what Sideload does NOT do:</p>
-      <ul>
-        <li>We do NOT collect any personal information</li>
-        <li>We do NOT track your browsing activity</li>
-        <li>We do NOT send data to external servers</li>
-        <li>We do NOT use analytics or tracking tools</li>
-        <li>We do NOT store any data outside your browser</li>
-        <li>We do NOT share any information with third parties</li>
-      </ul>
-    </div>
-
-    <div class="card">
-      <h2><span class="icon">💾</span> Local Storage Only</h2>
-      <p>All your data is stored locally in your browser using Chrome's built-in storage API. This includes:</p>
-      <ul>
-        <li>Your saved web apps and their URLs</li>
-        <li>App icon preferences and ordering</li>
-        <li>Todo list items</li>
-        <li>Quick notes</li>
-        <li>Pomodoro timer settings</li>
-        <li>Theme and display preferences</li>
-      </ul>
-      <p>This data never leaves your device and is only accessible to you. If you uninstall the extension, all locally stored data is automatically deleted.</p>
-    </div>
-
-    <div class="card">
-      <h2><span class="icon">🔑</span> Permissions Explained</h2>
-      <p>Sideload requires certain permissions to function. Here's why:</p>
-      <div class="permissions-grid">
-        <div class="permission-item">
-          <strong>Storage</strong>
-          <span>Save your apps, settings, and widget data locally in your browser</span>
+                <div class="lg:col-span-8 bg-slate-100 rounded-[3rem] p-8 md:p-12 relative overflow-hidden">
+                    <div id="mockup-container" class="chrome-browser !shadow-sm max-w-2xl mx-auto">
+                        <div class="chrome-toolbar">
+                            <div class="flex gap-1 mr-2"><div class="w-2 h-2 rounded-full bg-slate-300"></div><div class="w-2 h-2 rounded-full bg-slate-300"></div></div>
+                            <div id="mockup-tab-title" class="bg-white px-3 py-1 rounded-t-lg text-[9px] text-slate-500 font-medium">Main Workspace</div>
+                            <div class="chrome-url-bar !h-6 !text-[9px]"><i class="fas fa-lock text-[7px] mr-2"></i> website.com</div>
+                        </div>
+                        <div class="browser-layout !h-[300px]">
+                            <div class="side-panel !w-[150px]">
+                                <div class="sidebar-rail !w-[36px]">
+                                    <div class="rail-icon active !w-6 !h-6 !text-[10px]"><i class="fas fa-home"></i></div>
+                                    <div class="rail-icon !w-6 !h-6 !text-[10px]"><i class="fab fa-instagram"></i></div>
+                                    <div class="mt-auto"><div class="rail-icon !w-6 !h-6 !text-[10px]"><i class="fas fa-cog"></i></div></div>
+                                </div>
+                                <div id="side-panel-content" class="webview-area !bg-[#161b22]"></div>
+                            </div>
+                            <div class="main-webpage !p-6">
+                                <div class="skeleton-line w-full h-2"></div>
+                                <div class="skeleton-line w-5/6 h-2"></div>
+                                <div class="skeleton-img !h-20 mt-4"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-        <div class="permission-item">
-          <strong>Side Panel</strong>
-          <span>Display the extension interface in Chrome's side panel</span>
+    </section>
+
+    <!-- Key Features Grid -->
+    <section id="features" class="py-24 px-6 bg-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="text-center mb-16">
+                <h2 class="text-4xl font-extrabold text-slate-900 mb-4">Powerful Features</h2>
+                <p class="text-lg text-slate-600 max-w-2xl mx-auto">Everything you need to transform your side panel into a productivity powerhouse.</p>
+            </div>
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Side Panel Access -->
+                <div class="feature-card p-8 bg-slate-50 rounded-3xl border border-slate-100">
+                    <div class="w-12 h-12 bg-indigo-100 text-indigo-600 rounded-xl flex items-center justify-center text-xl mb-6"><i class="fas fa-columns"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Side Panel Access</h3>
+                    <p class="text-slate-600 text-sm">Open your favorite apps alongside any webpage without switching tabs.</p>
+                </div>
+                <!-- Multi-App -->
+                <div class="feature-card p-8 bg-slate-50 rounded-3xl border border-slate-100">
+                    <div class="w-12 h-12 bg-blue-100 text-blue-600 rounded-xl flex items-center justify-center text-xl mb-6"><i class="fas fa-layer-group"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Multi-App Management</h3>
+                    <p class="text-slate-600 text-sm">Add unlimited websites and switch between them instantly.</p>
+                </div>
+                <!-- Mobile Mode -->
+                <div class="feature-card p-8 bg-slate-50 rounded-3xl border border-slate-100">
+                    <div class="w-12 h-12 bg-pink-100 text-pink-600 rounded-xl flex items-center justify-center text-xl mb-6"><i class="fas fa-mobile-alt"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Mobile Mode</h3>
+                    <p class="text-slate-600 text-sm">Access mobile-optimized views that aren't available on desktop versions.</p>
+                </div>
+                <!-- Drag & Drop -->
+                <div class="feature-card p-8 bg-slate-50 rounded-3xl border border-slate-100">
+                    <div class="w-12 h-12 bg-emerald-100 text-emerald-600 rounded-xl flex items-center justify-center text-xl mb-6"><i class="fas fa-arrows-alt"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Drag and Drop</h3>
+                    <p class="text-slate-600 text-sm">Reorder your apps with simple drag and drop to organize your workspace.</p>
+                </div>
+                <!-- Custom Icons -->
+                <div class="feature-card p-8 bg-slate-50 rounded-3xl border border-slate-100">
+                    <div class="w-12 h-12 bg-orange-100 text-orange-600 rounded-xl flex items-center justify-center text-xl mb-6"><i class="fas fa-icons"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Custom Icons</h3>
+                    <p class="text-slate-600 text-sm">Choose between favicon, emoji, or letter icons for each app shortcut.</p>
+                </div>
+                <!-- Privacy First -->
+                <div class="feature-card p-8 bg-slate-50 rounded-3xl border border-slate-100">
+                    <div class="w-12 h-12 bg-slate-200 text-slate-800 rounded-xl flex items-center justify-center text-xl mb-6"><i class="fas fa-shield-alt"></i></div>
+                    <h3 class="text-xl font-bold mb-2">Privacy First</h3>
+                    <p class="text-slate-600 text-sm">All data is stored locally. No external servers or data collection.</p>
+                </div>
+            </div>
         </div>
-        <div class="permission-item">
-          <strong>Declarative Net Request</strong>
-          <span>Enable mobile user-agent mode and allow websites to load in iframes</span>
+    </section>
+
+    <!-- Productivity Hub -->
+    <section id="widgets" class="py-24 px-6 bg-slate-900 text-white relative overflow-hidden">
+        <div class="max-w-7xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+            <div class="order-2 md:order-1">
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 flex flex-col items-center">
+                        <i class="fas fa-clock text-blue-400 text-3xl mb-3"></i>
+                        <span class="font-bold text-sm">Clock & Date</span>
+                    </div>
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 flex flex-col items-center">
+                        <i class="fas fa-hourglass-start text-red-400 text-3xl mb-3"></i>
+                        <span class="font-bold text-sm">Pomodoro</span>
+                    </div>
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 flex flex-col items-center">
+                        <i class="fas fa-list-check text-emerald-400 text-3xl mb-3"></i>
+                        <span class="font-bold text-sm">Todo List</span>
+                    </div>
+                    <div class="bg-white/5 p-6 rounded-2xl border border-white/10 flex flex-col items-center">
+                        <i class="fas fa-calculator text-orange-400 text-3xl mb-3"></i>
+                        <span class="font-bold text-sm">Calculator</span>
+                    </div>
+                </div>
+            </div>
+            <div class="order-1 md:order-2">
+                <h2 class="text-4xl font-extrabold mb-6">Home Dashboard</h2>
+                <p class="text-lg text-slate-400 leading-relaxed mb-6">
+                    Sideload includes a built-in productivity dashboard. Quick math, focused work sessions, and idea capture are now just one click away.
+                </p>
+                <div class="bg-white/10 p-4 rounded-xl border-l-4 border-indigo-500">
+                    <p class="text-sm italic text-slate-300">"Includes clock with date, todo list for tasks, notes for ideas, and a Pomodoro timer."</p>
+                </div>
+            </div>
         </div>
-        <div class="permission-item">
-          <strong>Host Permissions (All URLs)</strong>
-          <span>Required to load any website you add into the side panel</span>
+    </section>
+
+    <!-- How to Use Section -->
+    <section id="how-to" class="py-24 px-6">
+        <div class="max-w-5xl mx-auto text-center">
+            <h2 class="text-4xl font-extrabold mb-12">How to Use</h2>
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-2xl mb-6">1</div>
+                    <p class="font-bold mb-2">Open Side Panel</p>
+                    <p class="text-slate-500 text-sm">Click the Sideload extension icon in your browser toolbar.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-2xl mb-6">2</div>
+                    <p class="font-bold mb-2">Add Favorites</p>
+                    <p class="text-slate-500 text-sm">Use the plus button to add your favorite websites and apps.</p>
+                </div>
+                <div class="flex flex-col items-center">
+                    <div class="w-16 h-16 bg-indigo-600 text-white rounded-full flex items-center justify-center font-bold text-2xl mb-6">3</div>
+                    <p class="font-bold mb-2">Browse Efficiently</p>
+                    <p class="text-slate-500 text-sm">Your apps are now one click away, regardless of what page you're on.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
+    </section>
 
-    <div class="card">
-      <h2><span class="icon">🌐</span> Third-Party Websites</h2>
-      <p>When you add websites to Sideload, those sites are loaded within the extension's side panel. Please note:</p>
-      <ul>
-        <li>Each website has its own privacy policy</li>
-        <li>Websites may use their own cookies and tracking</li>
-        <li>Sideload has no control over third-party website behavior</li>
-        <li>We recommend reviewing the privacy policies of sites you add</li>
-      </ul>
-    </div>
+    <!-- Privacy Section -->
+    <section id="privacy" class="py-24 px-6 bg-slate-50">
+        <div class="max-w-4xl mx-auto glass p-12 rounded-[3rem] text-center border-2 border-white">
+            <div class="w-16 h-16 bg-indigo-600 text-white rounded-2xl flex items-center justify-center text-2xl mx-auto mb-8 shadow-xl"><i class="fas fa-lock"></i></div>
+            <h2 class="text-3xl font-extrabold mb-6">Privacy and Security</h2>
+            <p class="text-xl text-slate-600 leading-relaxed mb-8">
+                Sideload stores <strong>all data locally in your browser</strong>. We don't collect, transmit, or store any of your information on external servers. Your browsing habits and saved apps remain completely private.
+            </p>
+            <div class="flex flex-wrap justify-center gap-6">
+                <span class="bg-white px-4 py-2 rounded-full text-sm font-bold text-slate-500 border border-slate-200"><i class="fas fa-server mr-2"></i> No External Servers</span>
+                <span class="bg-white px-4 py-2 rounded-full text-sm font-bold text-slate-500 border border-slate-200"><i class="fas fa-user-secret mr-2"></i> No Data Collection</span>
+            </div>
+        </div>
+    </section>
 
-    <div class="card">
-      <h2><span class="icon">👤</span> Your Control</h2>
-      <p>You have complete control over your data:</p>
-      <ul>
-        <li>Delete individual apps anytime from Settings</li>
-        <li>Clear all data by uninstalling the extension</li>
-        <li>Export/backup not needed - data only exists locally</li>
-        <li>No account required - use immediately without signup</li>
-      </ul>
-    </div>
+    <!-- Final Call to Action -->
+    <section class="py-24 px-6 bg-slate-900 text-white">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="flex items-center justify-center gap-3 mb-8">
+                <div class="w-10 h-10 bg-indigo-600 rounded-xl flex items-center justify-center font-bold text-xl">S</div>
+                <h3 class="text-2xl font-bold tracking-tight">Sideload</h3>
+            </div>
+            <h2 class="text-4xl md:text-6xl font-extrabold mb-8">Stop Tab Overload. <br><span class="gradient-text">Start Sideloading.</span></h2>
+            <a href="https://chromewebstore.google.com/detail/sideload-your-favorite-we/fhddbcmcanhjfalacfakppkkplidfhbh" target="_blank" class="inline-block bg-indigo-600 text-white px-12 py-6 rounded-3xl text-2xl font-bold hover:bg-indigo-700 transition shadow-2xl shadow-indigo-900/40 transform hover:scale-105">
+                Add to Chrome — It's Free
+            </a>
+            <div class="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4 text-slate-500 text-sm">
+                <p>© 2024 Widgetto. All rights reserved.</p>
+                <div class="flex gap-8">
+                    <a href="https://widgetto.select.my.id/sideload/" target="_blank" class="hover:text-white transition">Privacy Policy</a>
+                    <a href="mailto:widgetto@select.my.id" class="hover:text-white transition">Support</a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <div class="card">
-      <h2><span class="icon">📝</span> Changes to This Policy</h2>
-      <p>If we ever make changes to this privacy policy, we will update this page and the "Last updated" date above. Since we don't collect any data, we have no way to notify you directly of changes - we recommend checking this page periodically.</p>
-    </div>
+    <script>
+        const sidePanelContent = document.getElementById('side-panel-content');
+        const tabTitle = document.getElementById('mockup-tab-title');
 
-    <div class="card">
-      <h2><span class="icon">📧</span> Contact</h2>
-      <p>If you have any questions about this privacy policy or the extension, please open an issue on our GitHub repository or contact us through the Chrome Web Store listing.</p>
-    </div>
+        const useCases = {
+            social: {
+                title: "Post Composer",
+                content: `
+                    <div class="p-3">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-5 h-5 rounded-full bg-gradient-to-tr from-yellow-400 to-pink-500"></div>
+                            <span class="text-[7px] font-bold">Instagram Feed</span>
+                        </div>
+                        <div class="aspect-square bg-slate-800 rounded-lg mb-2 flex items-center justify-center">
+                            <i class="fab fa-instagram text-slate-700 text-lg"></i>
+                        </div>
+                        <div class="h-1 w-full bg-white/10 rounded mb-1"></div>
+                        <div class="h-1 w-2/3 bg-white/10 rounded"></div>
+                    </div>
+                `
+            },
+            dev: {
+                title: "Tailwind UI / Docs",
+                content: `
+                    <div class="p-3">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-5 h-5 rounded bg-blue-500 flex items-center justify-center text-[10px]"><i class="fas fa-book"></i></div>
+                            <span class="text-[7px] font-bold">Documentation</span>
+                        </div>
+                        <div class="bg-white/5 p-2 rounded border border-white/5 mb-2">
+                            <div class="h-1 w-full bg-blue-400/30 rounded mb-1"></div>
+                            <div class="h-1 w-3/4 bg-white/10 rounded"></div>
+                        </div>
+                        <div class="bg-white/5 p-2 rounded border border-white/5">
+                            <div class="h-1 w-full bg-blue-400/30 rounded mb-1"></div>
+                            <div class="h-1 w-1/2 bg-white/10 rounded"></div>
+                        </div>
+                    </div>
+                `
+            },
+            student: {
+                title: "Research Paper",
+                content: `
+                    <div class="p-3">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-5 h-5 rounded-full bg-emerald-500 flex items-center justify-center text-[10px]"><i class="fas fa-pen"></i></div>
+                            <span class="text-[7px] font-bold">Quick Notes</span>
+                        </div>
+                        <div class="bg-white/5 p-2 rounded-lg border border-white/10 min-h-[100px]">
+                            <p class="text-[6px] text-slate-300 leading-tight">Key takeaway from section 2: Remember to check mobile-optimized views...</p>
+                        </div>
+                    </div>
+                `
+            },
+            pro: {
+                title: "Project Dashboard",
+                content: `
+                    <div class="p-3">
+                        <div class="flex items-center gap-2 mb-3">
+                            <div class="w-5 h-5 rounded bg-orange-500 flex items-center justify-center text-[10px]"><i class="fas fa-table-columns"></i></div>
+                            <span class="text-[7px] font-bold">Web Tool</span>
+                        </div>
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="bg-white/5 p-2 rounded flex flex-col items-center">
+                                <div class="text-[8px] font-bold">12</div>
+                                <div class="text-[5px] opacity-40">Tasks</div>
+                            </div>
+                            <div class="bg-white/5 p-2 rounded flex flex-col items-center">
+                                <div class="text-[8px] font-bold text-emerald-400">92%</div>
+                                <div class="text-[5px] opacity-40">Uptime</div>
+                            </div>
+                        </div>
+                    </div>
+                `
+            }
+        };
 
-    <footer class="footer">
-      <p>Sideload - Side Panel Web App Manager</p>
-      <p>Made with privacy in mind</p>
-    </footer>
-  </div>
+        function switchCase(caseId) {
+            document.querySelectorAll('.case-tab').forEach(tab => tab.classList.remove('active'));
+            document.getElementById('btn-' + caseId).classList.add('active');
+            const data = useCases[caseId];
+            sidePanelContent.innerHTML = data.content;
+            tabTitle.innerText = data.title;
+        }
+
+        switchCase('social');
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
 </body>
 </html>
